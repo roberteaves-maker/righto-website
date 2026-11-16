@@ -1,0 +1,21 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "M2MCF8UYF7.com.roberteaves.LeaveOnTime"
+        ],
+        "components": [
+          {
+            "/": "/t",
+            "comment": "Shared trip"
+          },
+          {
+            "/": "/t/*",
+            "comment": "Shared trip"
+          }
+        ]
+      }
+    ]
+  }
+}
