@@ -1,0 +1,38 @@
+/* Righto's hello: drops in, blinks, waves, checks the phone, presses his crown, happy hop.
+   Plays once (about 4 s), then he just bobs and blinks now and then.
+   Everything is CSS so the same timeline renders the TikTok / Instagram clip. */
+.righto-live{display:block;width:100%;height:auto;overflow:visible;cursor:pointer}
+.righto-live g{transform-box:view-box}
+.r-all{transform-origin:100px 206px;animation:r-drop .6s cubic-bezier(.5,0,.9,.6) both,r-hop .7s 3.25s cubic-bezier(.3,1.5,.5,1) forwards}
+.r-squash{transform-origin:100px 206px;animation:r-squash .55s .55s ease-out forwards}
+.r-eyes{transform-origin:100px 110px;animation:r-blink .22s 1.15s,r-blink-idle 5s 5s infinite}
+.r-arm{transform-origin:170px 126px;animation:r-wave 1.3s 1.4s ease-in-out}
+.r-look{animation:r-look 1.3s 2.45s ease-in-out}
+.r-crown{transform-origin:100px 30px;animation:r-press .35s 2.95s ease-in-out}
+.r-mouth{transform-origin:100px 136px;animation:r-grin .9s 3.15s ease-out both}
+.r-idle{animation:r-bob 3.6s 4.2s ease-in-out infinite;transform-origin:50% 100%}
+
+@keyframes r-drop{0%{transform:translateY(-260px)}100%{transform:translateY(0)}}
+@keyframes r-squash{0%{transform:scale(1.14,.84)}35%{transform:scale(.94,1.07)}65%{transform:scale(1.03,.97)}100%{transform:scale(1)}}
+@keyframes r-blink{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.08)}}
+@keyframes r-blink-idle{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.08)}}
+@keyframes r-wave{0%{transform:none}15%{transform:translate(13px,-36px) rotate(25deg)}32%{transform:translate(13px,-36px) rotate(65deg)}49%{transform:translate(13px,-36px) rotate(25deg)}66%{transform:translate(13px,-36px) rotate(65deg)}82%{transform:translate(13px,-36px) rotate(35deg)}100%{transform:none}}
+@keyframes r-look{0%{transform:translate(0,0)}25%,75%{transform:translate(7px,-4px)}100%{transform:translate(0,0)}}
+@keyframes r-press{0%,100%{transform:translateY(0)}45%{transform:translateY(7px) scale(1.04,.9)}}
+@keyframes r-grin{0%{transform:scale(1)}30%{transform:scale(1.35,1.5)}100%{transform:scale(1.1,1.15)}}
+@keyframes r-hop{0%{transform:translateY(0) scale(1.08,.92)}40%{transform:translateY(-34px) scale(.95,1.06)}75%{transform:translateY(0) scale(1.06,.94)}100%{transform:translateY(0) scale(1)}}
+@keyframes r-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+
+/* The phone flips from the countdown to "Time to go!" when he presses his crown */
+.ph-a{animation:ph-out .25s 3.05s both}
+.ph-b{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;opacity:0;animation:ph-in .5s 3.1s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes ph-out{to{opacity:0;transform:scale(.8)}}
+@keyframes ph-in{0%{opacity:0;transform:scale(.6)}100%{opacity:1;transform:scale(1)}}
+
+/* Tap him and he hops again */
+.righto-live.again .r-all{animation:r-hop .7s cubic-bezier(.3,1.5,.5,1) both}
+
+@media (prefers-reduced-motion:reduce){
+  .righto-live *,.ph-a,.ph-b,.r-idle{animation:none!important}
+  .ph-a{opacity:0}.ph-b{opacity:1}
+}
