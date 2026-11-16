@@ -4,46 +4,251 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<link rel="icon" href="/favicon.png" type="image/png">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="preload" href="/assets/fonts/nunito-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/style.css">
-<meta name="apple-itunes-app" content="app-id=6825351924">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/nunito-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/home.css">
 <title>Righto: Leave On Time</title>
-<meta name="description" content="Righto tells you when to start getting ready and when to leave, using live traffic.">
+<meta name="description" content="Righto tells you when to start getting ready and when to leave, door to door, using live traffic. Coming soon to the App Store. Join the waitlist.">
 <meta property="og:title" content="Righto: Leave On Time">
-<meta property="og:description" content="Righto tells you when to start getting ready and when to leave, using live traffic.">
+<meta property="og:description" content="Righto tells you when to start getting ready and when to leave. Coming soon to the App Store.">
 <meta property="og:image" content="https://heyrighto.app/assets/app-icon.png">
+<meta name="theme-color" content="#FFFFFF">
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
-<div class="wrap">
-<header class="top">
-  <a class="home" href="/" aria-label="Righto home"><img class="wordmark wm-light" src="/assets/wordmark-light.svg" alt="righto"><img class="wordmark wm-dark" src="/assets/wordmark-dark.svg" alt="righto"></a>
-  <nav><a href="/support/">Help</a><a href="/privacy/">Privacy</a></nav>
+
+<!-- Little 3D props, drawn once and reused -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-car" viewBox="0 0 120 80">
+      <rect x="8" y="34" width="104" height="30" rx="14" fill="#C94E2B"/>
+      <rect x="8" y="28" width="104" height="30" rx="14" fill="#F0663F"/>
+      <path d="M30 30 L42 10 Q45 6 50 6 H74 Q79 6 82 10 L94 30Z" fill="#F0663F"/>
+      <path d="M40 28 L48 14 H60 V28Z M66 28 V14 H76 L84 28Z" fill="#DDF3FF"/>
+      <circle cx="32" cy="62" r="13" fill="#14302E"/><circle cx="32" cy="62" r="5" fill="#B9C9C6"/>
+      <circle cx="88" cy="62" r="13" fill="#14302E"/><circle cx="88" cy="62" r="5" fill="#B9C9C6"/>
+      <rect x="100" y="36" width="10" height="7" rx="3" fill="#FFE29A"/>
+    </symbol>
+    <symbol id="i-train" viewBox="0 0 100 110">
+      <rect x="10" y="10" width="80" height="86" rx="22" fill="#0B7A67"/>
+      <rect x="10" y="4" width="80" height="86" rx="22" fill="#12A88D"/>
+      <rect x="22" y="18" width="56" height="30" rx="10" fill="#DDF3FF"/>
+      <rect x="20" y="58" width="60" height="8" rx="4" fill="#0B7A67"/>
+      <circle cx="28" cy="76" r="6" fill="#FFE29A"/><circle cx="72" cy="76" r="6" fill="#FFE29A"/>
+      <path d="M26 96 L16 108 M74 96 L84 108" stroke="#14302E" stroke-width="6" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-clock" viewBox="0 0 100 100">
+      <circle cx="50" cy="55" r="42" fill="#E9B730"/>
+      <circle cx="50" cy="50" r="42" fill="#FFC83D"/>
+      <circle cx="50" cy="50" r="31" fill="#FFF8E1"/>
+      <path d="M50 30 V50 L63 58" stroke="#0F2A2E" stroke-width="7" stroke-linecap="round" fill="none"/>
+      <circle cx="50" cy="50" r="5" fill="#0F2A2E"/>
+    </symbol>
+    <symbol id="i-pin" viewBox="0 0 80 100">
+      <path d="M40 98 C40 98 8 62 8 38 A32 32 0 0 1 72 38 C72 62 40 98 40 98Z" fill="#C94E2B" transform="translate(0 4)"/>
+      <path d="M40 98 C40 98 8 62 8 38 A32 32 0 0 1 72 38 C72 62 40 98 40 98Z" fill="#F0663F"/>
+      <circle cx="40" cy="38" r="13" fill="#FFF"/>
+    </symbol>
+    <symbol id="i-cup" viewBox="0 0 100 100">
+      <path d="M70 40 h8 a14 14 0 0 1 0 28 h-8" stroke="#8E9DCC" stroke-width="8" fill="none"/>
+      <path d="M14 34 H76 V70 Q76 90 56 90 H34 Q14 90 14 70Z" fill="#2E4A8A"/>
+      <path d="M14 30 H76 V66 Q76 86 56 86 H34 Q14 86 14 66Z" fill="#4A68B0"/>
+      <rect x="14" y="26" width="62" height="10" rx="5" fill="#2E4A8A"/>
+      <path d="M36 18 q-6 -8 0 -14 M52 18 q-6 -8 0 -14" stroke="#B9C9C6" stroke-width="5" stroke-linecap="round" fill="none"/>
+    </symbol>
+    <symbol id="i-keys" viewBox="0 0 100 100">
+      <circle cx="34" cy="34" r="22" fill="none" stroke="#E9B730" stroke-width="10"/>
+      <circle cx="34" cy="30" r="22" fill="none" stroke="#FFC83D" stroke-width="10"/>
+      <path d="M50 46 L84 80 M70 66 L78 58 M78 74 L86 66" stroke="#FFC83D" stroke-width="10" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-cal" viewBox="0 0 100 100">
+      <rect x="10" y="18" width="80" height="76" rx="18" fill="#B7A6F0"/>
+      <rect x="10" y="12" width="80" height="76" rx="18" fill="#FFFFFF"/>
+      <path d="M10 30 a18 18 0 0 1 18 -18 h44 a18 18 0 0 1 18 18 v6 H10Z" fill="#7B61E0"/>
+      <path d="M32 58 l10 10 l20 -22" stroke="#12A88D" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    </symbol>
+    <symbol id="i-sun" viewBox="0 0 100 100">
+      <g stroke="#FFC83D" stroke-width="8" stroke-linecap="round"><path d="M50 4v12M50 84v12M4 50h12M84 50h12M17 17l8 8M75 75l8 8M83 17l-8 8M25 75l-8 8"/></g>
+      <circle cx="50" cy="53" r="24" fill="#E9B730"/><circle cx="50" cy="50" r="24" fill="#FFC83D"/>
+    </symbol>
+    <symbol id="i-moon" viewBox="0 0 100 100">
+      <path d="M62 10 A42 42 0 1 0 92 66 A34 34 0 0 1 62 10Z" fill="#E9B730" transform="translate(0 4)"/>
+      <path d="M62 10 A42 42 0 1 0 92 66 A34 34 0 0 1 62 10Z" fill="#FFE29A"/>
+    </symbol>
+    <symbol id="i-star" viewBox="0 0 100 100">
+      <path d="M50 6 L62 36 L94 38 L69 58 L77 90 L50 72 L23 90 L31 58 L6 38 L38 36Z" fill="#FFC83D" stroke="#E9B730" stroke-width="5" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-lock" viewBox="0 0 100 100">
+      <path d="M30 44 V32 a20 20 0 0 1 40 0 V44" stroke="#B9C9C6" stroke-width="10" fill="none"/>
+      <rect x="16" y="46" width="68" height="50" rx="16" fill="#0B7A67"/>
+      <rect x="16" y="40" width="68" height="50" rx="16" fill="#12A88D"/>
+      <circle cx="50" cy="62" r="7" fill="#FFF"/><rect x="47" y="64" width="6" height="14" rx="3" fill="#FFF"/>
+    </symbol>
+    <symbol id="i-light" viewBox="0 0 60 110">
+      <rect x="26" y="70" width="8" height="40" fill="#55706F"/>
+      <rect x="8" y="6" width="44" height="72" rx="14" fill="#0A1C1B"/>
+      <rect x="8" y="2" width="44" height="72" rx="14" fill="#14302E"/>
+      <circle cx="30" cy="18" r="8" fill="#F0663F"/><circle cx="30" cy="38" r="8" fill="#5A4A1A"/><circle cx="30" cy="58" r="8" fill="#2E5A4E"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="bar">
+  <div class="bar-in">
+    <a class="home" href="./" aria-label="Righto home"><img class="wordmark wm-light" src="assets/wordmark-light.svg" alt="righto"><img class="wordmark wm-dark" src="assets/wordmark-dark.svg" alt="righto"></a>
+    <a class="btn small" href="#join">Join the waitlist</a>
+  </div>
 </header>
 
 <main>
-<section class="hero">
-  <img class="icon" src="/assets/app-icon.png" width="128" height="128" alt="The Righto app icon">
-  <h1>Never be late again.<br>Well, nearly.</h1>
-  <p class="lead">Righto tells you when to start getting ready and when to leave, using live traffic.</p>
-  <p><a class="btn" href="https://apps.apple.com/app/id6825351924">Get Righto on the App Store</a></p>
-  <p class="muted">For iPhone. Free to try.</p>
+<div class="wrap">
+  <section class="hero">
+    <div class="hero-art">
+      <div class="stage" style="--tile-deep:#8BD9C3">
+        <div class="tile" style="background:#C9F2E5"></div>
+        <svg class="prop" style="left:0;top:14%;width:20%;--r:-10deg" aria-hidden="true"><use href="#i-pin"/></svg>
+        <svg class="prop" style="left:4%;bottom:6%;width:22%" aria-hidden="true"><use href="#i-keys"/></svg>
+        <div class="phone" aria-hidden="true"><div class="scr"><span class="k">Leave in</span><span class="t">12 min</span><span class="s">for 9:00 at Work</span><span class="bar2"><b></b></span></div></div>
+        <img class="righto bob" src="assets/righto/plain.svg" alt="Righto, a friendly round teal stopwatch, smiling">
+      </div>
+    </div>
+    <div class="hero-copy">
+      <span class="pill"><i></i>Coming soon to the App Store</span>
+      <h1>calm. kind.<br>on time.</h1>
+      <p class="lead">Righto tells you when to start getting ready and when to leave, door to door, using live traffic. Be the first to get it.</p>
+      <div class="join" id="join-top">
+        <form class="waitlist" novalidate>
+          <label class="hp" aria-hidden="true">Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+          <input type="email" name="email" required autocomplete="email" placeholder="Your email" aria-label="Your email">
+          <button class="btn" type="submit">Join the waitlist</button>
+        </form>
+        <p class="err" role="alert">That email doesn't look quite right. Mind checking it?</p>
+        <p class="fine">One email when Righto launches. No spam. Unsubscribe any time. <a href="privacy/">Privacy</a></p>
+        <div class="done" role="status"><svg width="34" height="34" aria-hidden="true"><use href="#i-star"/></svg><span>Righto, you're on the list! We'll email you the day it lands.</span></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="wrap">
+  <section class="how reveal">
+    <h2>how it works</h2>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><b>Tell Righto where</b><p>Pick the place, or bring a trip in from your calendar.</p></div>
+      <div class="step"><span class="n">2</span><b>And when you need to be there</b><p>Righto works back: getting ready, the journey, parking and the walk in.</p></div>
+      <div class="step"><span class="n">3</span><b>Righto gives you a nudge</b><p>Time to get ready. Time to go. That's it. No maths, no rushing.</p></div>
+    </div>
+  </section>
+
+  <section class="feature reveal">
+    <div class="art">
+      <div class="stage" style="--tile-deep:#E89C83">
+        <div class="tile" style="background:#FFD9CC"></div>
+        <svg class="prop" style="left:-2%;bottom:4%;width:40%" aria-hidden="true"><use href="#i-car"/></svg>
+        <svg class="prop" style="right:4%;top:8%;width:13%" aria-hidden="true"><use href="#i-light"/></svg>
+        <img class="righto" src="assets/righto/work.svg" alt="Righto with a work briefcase">
+      </div>
+    </div>
+    <div class="copy">
+      <h2>keeps an eye on the traffic</h2>
+      <p>If the roads get busy, Righto tells you to leave a bit earlier. If they clear, you get a few extra minutes with your coffee.</p>
+    </div>
+  </section>
+
+  <section class="feature reveal">
+    <div class="art">
+      <div class="stage" style="--tile-deep:#8CC4EA">
+        <div class="tile" style="background:#D4EEFF"></div>
+        <svg class="prop" style="right:0;bottom:6%;width:28%" aria-hidden="true"><use href="#i-train"/></svg>
+        <svg class="prop" style="left:2%;top:10%;width:20%" aria-hidden="true"><use href="#i-clock"/></svg>
+        <img class="righto" src="assets/righto/station.svg" alt="Righto wearing a station scarf">
+      </div>
+    </div>
+    <div class="copy">
+      <h2>trains and buses too</h2>
+      <p>Righto follows the real timetable, so you know which train to catch and when to head for the station. Parking and the walk to the platform included.</p>
+    </div>
+  </section>
+
+  <section class="feature reveal">
+    <div class="art">
+      <div class="stage" style="--tile-deep:#B7A6F0">
+        <div class="tile" style="background:#E8E0FF"></div>
+        <svg class="prop" style="right:0;top:8%;width:24%;transform:rotate(8deg)" aria-hidden="true"><use href="#i-cal"/></svg>
+        <svg class="prop" style="left:0;bottom:8%;width:20%" aria-hidden="true"><use href="#i-cup"/></svg>
+        <img class="righto" src="assets/righto/gym.svg" alt="Righto wearing a gym sweatband">
+      </div>
+    </div>
+    <div class="copy">
+      <h2>your whole week, sorted</h2>
+      <p>Plan up to 12 trips a week ahead, or bring them in from your calendar. The school run or the commute? Set it once for every weekday.</p>
+    </div>
+  </section>
+
+  <section class="feature reveal">
+    <div class="art">
+      <div class="stage" style="--tile-deep:#E9B730">
+        <div class="tile" style="background:#FFEFB8"></div>
+        <svg class="prop" style="right:2%;top:2%;width:26%" aria-hidden="true"><use href="#i-sun"/></svg>
+        <img class="righto" src="assets/righto/holiday.svg" alt="Righto in sunglasses, relaxed">
+      </div>
+    </div>
+    <div class="copy">
+      <h2>nobody is perfect, even righto</h2>
+      <p>Running late? No worries, it happens. Righto is a buddy, not a nag. No guilt trips, just a calm nudge at the right moment.</p>
+    </div>
+  </section>
+
+  <section class="feature reveal">
+    <div class="art">
+      <div class="stage" style="--tile-deep:#8E9DCC">
+        <div class="tile" style="background:#D9E0F7"></div>
+        <svg class="prop" style="left:2%;top:4%;width:22%" aria-hidden="true"><use href="#i-moon"/></svg>
+        <svg class="prop" style="right:10%;top:6%;width:9%" aria-hidden="true"><use href="#i-star"/></svg>
+        <svg class="prop" style="right:0;bottom:8%;width:20%" aria-hidden="true"><use href="#i-lock"/></svg>
+        <img class="righto" src="assets/righto/bed.svg" alt="Righto in a nightcap, ready for bed">
+      </div>
+    </div>
+    <div class="copy">
+      <h2>stays on your phone</h2>
+      <p>No account, no tracking, no ads. Your trips are yours. Righto even says goodnight.</p>
+    </div>
+  </section>
+</div>
+
+<section class="band" id="join">
+  <svg class="floaty" style="left:5%;top:12%;--r:-12deg" aria-hidden="true" viewBox="0 0 120 80"><use href="#i-car"/></svg>
+  <svg class="floaty" style="left:14%;bottom:14%;--r:10deg" aria-hidden="true" viewBox="0 0 100 100"><use href="#i-clock"/></svg>
+  <svg class="floaty" style="right:7%;top:14%;--r:8deg" aria-hidden="true" viewBox="0 0 100 110"><use href="#i-train"/></svg>
+  <svg class="floaty" style="right:15%;bottom:12%;--r:-6deg" aria-hidden="true" viewBox="0 0 80 100"><use href="#i-pin"/></svg>
+  <svg class="floaty" style="left:30%;top:6%;--r:14deg;width:44px" aria-hidden="true" viewBox="0 0 100 100"><use href="#i-star"/></svg>
+  <svg class="floaty" style="right:30%;bottom:6%;--r:-10deg" aria-hidden="true" viewBox="0 0 100 100"><use href="#i-keys"/></svg>
+  <svg class="floaty" style="left:2%;top:58%;--r:6deg" aria-hidden="true" viewBox="0 0 100 100"><use href="#i-cup"/></svg>
+  <h2>be first through the door</h2>
+  <p class="lead">Righto is coming soon to the App Store for iPhone. Join the waitlist and we'll tell you the moment it's out.</p>
+  <div class="join">
+    <form class="waitlist" novalidate>
+      <label class="hp" aria-hidden="true">Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+      <input type="email" name="email" required autocomplete="email" placeholder="Your email" aria-label="Your email">
+      <button class="btn" type="submit">Join the waitlist</button>
+    </form>
+    <p class="err" role="alert">That email doesn't look quite right. Mind checking it?</p>
+    <p class="fine">One email when Righto launches. No spam. Unsubscribe any time. <a href="privacy/">Privacy</a></p>
+    <div class="done" role="status"><svg width="34" height="34" aria-hidden="true"><use href="#i-star"/></svg><span>Righto, you're on the list! We'll email you the day it lands.</span></div>
+  </div>
 </section>
-<ul class="points">
-  <li><b>Door to door</b>Getting ready, the drive, parking and the walk in, all counted.</li>
-  <li><b>Watches the traffic for you</b>If the roads get busier, Righto tells you to leave earlier. If they clear, you get a few more minutes.</li>
-  <li><b>Kind, not naggy</b>Nobody is perfect, even Righto. Running late? No worries, it happens.</li>
-  <li><b>Stays on your phone</b>No account, no tracking, no ads.</li>
-</ul>
 </main>
+
 <footer>
-  <span>© 2026 R Eaves Studios</span>
-  <a href="/support/">Help</a>
-  <a href="/privacy/">Privacy</a>
-  <a href="mailto:hello@heyrighto.app">hello@heyrighto.app</a>
+  <div class="wrap">
+    <span class="grow">© 2026 R Eaves Studios</span>
+    <a href="support/">Help</a>
+    <a href="privacy/">Privacy</a>
+    <a href="mailto:hello@heyrighto.app">hello@heyrighto.app</a>
+  </div>
 </footer>
 
-</div>
+<script src="assets/home.js" defer></script>
 </body>
 </html>
