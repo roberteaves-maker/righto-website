@@ -4,7 +4,7 @@
 // Kit:        https://app.kit.com/forms/FORM_ID/subscriptions        (field: email_address)
 // MailerLite: https://assets.mailerlite.com/jsonp/ACCOUNT/forms/FORM_ID/subscribe (field: fields[email])
 // While it's empty the form just shows the thank-you message and sends nothing.
-var WAITLIST_URL = '';
+var WAITLIST_URL = 'https://app.kit.com/forms/10200646/subscriptions';
 var WAITLIST_FIELD = 'email_address';
 
 (function () {
