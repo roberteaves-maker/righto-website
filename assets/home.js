@@ -21,8 +21,14 @@ var WAITLIST_FIELD = 'email_address';
     items.forEach(function (el) { el.classList.add('in'); });
   }
 
-  // Tap Righto and he hops.
-  document.querySelectorAll('.righto').forEach(function (r) {
+  // Tap the animated Righto and he does his wave again; the drawn ones hop.
+  document.querySelectorAll('.righto-live').forEach(function (svg) {
+    svg.addEventListener('click', function (e) {
+      e.stopPropagation();
+      svg.classList.remove('wave-now'); void svg.getBoundingClientRect(); svg.classList.add('wave-now');
+    });
+  });
+  document.querySelectorAll('img.righto').forEach(function (r) {
     r.addEventListener('click', function () {
       r.classList.remove('hop'); void r.offsetWidth; r.classList.add('hop');
     });
