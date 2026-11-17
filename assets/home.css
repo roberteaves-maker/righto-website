@@ -71,15 +71,9 @@ h2{font-size:clamp(32px,4.6vw,48px);line-height:1.08}
 .prop{position:absolute;filter:drop-shadow(0 6px 6px rgba(15,42,46,.12))}
 
 /* Hero phone */
-.phone{position:absolute;right:0;top:4%;width:33%;aspect-ratio:9/18.5;border-radius:28px;background:#14302E;padding:7px;box-shadow:0 8px 0 #0A1C1B,0 20px 40px rgba(15,42,46,.18);transform:rotate(8deg)}
-.phone .scr{position:relative;height:100%;border-radius:22px;background:linear-gradient(180deg,#D7F7EE,#FFFFFF 60%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center;color:#0F2A2E;padding:10px}
-.phone .k{font-size:clamp(9px,1.1vw,12px);font-weight:800;color:#55706F;text-transform:uppercase;letter-spacing:.06em}
-.phone .t{white-space:nowrap;font-weight:900;font-size:clamp(22px,3vw,34px);line-height:1;color:#0E9F86}
-.phone .s{font-weight:800;font-size:clamp(10px,1.2vw,13px)}
-.phone .ph-a{display:flex;flex-direction:column;align-items:center;gap:4px;width:100%}
-.phone .t.go{white-space:normal;font-size:clamp(20px,2.8vw,32px);line-height:1;color:#F0663F}
-.phone .bar2{width:80%;height:8px;border-radius:8px;background:#E2EFEB;margin-top:8px;overflow:hidden}
-.phone .bar2 b{display:block;height:100%;width:94%;background:#3DD6B5;border-radius:8px}
+.phone{position:absolute;right:-2%;top:2%;width:40%;aspect-ratio:1320/2868;box-sizing:content-box;border-radius:30px;background:#14302E;padding:6px;box-shadow:0 8px 0 #0A1C1B,0 20px 40px rgba(15,42,46,.18);transform:rotate(8deg)}
+.phone .scr{position:relative;height:100%;border-radius:25px;overflow:hidden;background:#7EC3E6}
+.phone .scr img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 
 /* Feature rows (zig-zag) */
 .feature{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:48px;padding:72px 0}
@@ -157,4 +151,4 @@ footer .grow{flex:1}
   .band .floaty:nth-of-type(3){right:8%!important;top:36px!important;bottom:auto!important;left:auto!important}
   .band .floaty:nth-of-type(4){right:26%!important;bottom:36px!important;top:auto!important;left:auto!important}
 }
-.hero .stage .righto{left:4%;width:62%}
+.hero .stage .righto{left:0;width:58%}
